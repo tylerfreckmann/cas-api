@@ -17,35 +17,14 @@
 					</div>
 				</div>
 				<!-- DEMO -->
-					<div>
-						<iframe src="https://www.gstatic.com/cloud-site-ux/vision.min.html" frameborder="0" scrolling="no" height="150px" style="width: 1px; min-width: 100%; height: 190px;"></iframe>
+					<div class="demo-container" id="image-demo">
+						<div class="ty-center ty-app">
+							<div class="try-it ty-app">Try it!</div>
+							<form action="/upload" class="dropzone ty-center ty-app" id="my-awesome-dropzone"></form>
+						</div>
 					</div>
 				<!-- END DEMO -->
 			</section>
 		</article>
 	</div>
-
-	<!-- <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-	  <header class="masthead">
-	    <div class="inner">
-	      <h3>CAS API</h1>
-	    </div>
-	  </header>
-
-		<main role="main" class="inner cover">
-			<h1 class="cover-heading">What is this?</h1>
-			<p class="lead">Use SAS AI to do image recognition. Embed SAS AI anywhere with APIs. Drop and image below and see what it is.</p>
-
-			<form class="box" method="post" action="/upload" enctype="multipart/form-data">
-				<div class="box__input">
-					<input class="box__file" type="file" name="files[]" id="file" data-multiple-caption="{count} files selected" multiple />
-					<label for="file"><strong>Choose a file</strong><span class="box__dragndrop"> or drag it here</span>.</label>
-					<button class="box__button" type="submit">Upload</button>
-				</div>
-				<div class="box__uploading">Uploading&hellip;</div>
-				<div class="box__success">Done!</div>
-				<div class="box__error">Error! <span></span>.</div>
-			</form>
-		</main>
-	</div> -->
 {% endblock %}
