@@ -13,19 +13,11 @@
 
     <title>cas-api</title>
   </head>
-  <body class="text-center">
 
-    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-      <header class="masthead">
-        <div class="inner">
-          <h3>CAS API</h1>
-        </div>
-      </header>
-      
-      {% block content %}
-      {% endblock %}
-    
-    </div>
+  <body>
+
+    {% block content %}
+    {% endblock %}
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="{{ url_for('static', filename='js/jquery-3.3.1.min.js') }}"></script>

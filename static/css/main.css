@@ -1,4 +1,62 @@
-html,
+.ty-wrapper {
+  color: #4A5960;
+  overflow: hidden;
+}
+
+header {
+  min-height: 103px;
+  position: relative;
+  padding: 20px 0 30px 10px;
+}
+
+.ty-header-div {
+  max-width: 1280px;
+  box-sizing: border-box;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 16px;
+  margin-top: 24px;
+  position: relative;
+  z-index: 1;
+}
+
+.ty-title {
+  color: #36474F;
+}
+
+.ty-content {
+  padding-top: 64px;
+  padding-bottom: 64px;
+  padding-left: 10000px;
+  padding-right: 10000px;
+  margin-left: -10000px;
+  margin-right: -10000px;
+  background: #F7F7F7;
+}
+
+.ty-showcase {
+  box-sizing: border-box;
+  margin-bottom: 64px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  padding-bottom: 64px;
+  max-width: 1280px;
+}
+
+.ty-showcase-content {
+  margin: 0 8px;
+}
+
+.ty-text-body {
+  margin-bottom: 16px;
+}
+
+iframe {
+  
+}
+
+/*html,
 body {
   height: 100%;
   background-color: #333;
@@ -39,7 +97,7 @@ body {
 }
 
 .box__file + label {
-	cursor: pointer; /* "hand" cursor */
+	cursor: pointer;
 }
 
 .box__file:focus + label {
@@ -90,3 +148,4 @@ body {
 .box__button {
   display: none;
 }
+*/

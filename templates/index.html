@@ -1,19 +1,51 @@
 {% extends "layout.html" %}
 
 {% block content %}
-	<main role="main" class="inner cover">
-		<h1 class="cover-heading">What is this?</h1>
-		<p class="lead">Use SAS AI to do image recognition. Embed SAS AI anywhere with APIs. Drop and image below and see what it is.</p>
+	<div class="d-flex w-100 h-100 p-3 mx-auto flex-column ty-wrapper">
+		<article>
+			<header>
+				<div class="ty-header-div">
+					<h1 class="ty-title">CAS API</h1>
+					<h2 class="ty-subtitle">Use the power of CAS in your applications</h2>
+				</div>
+			</header>
+			<section class="ty-content">
+				<div class="ty-showcase">
+					<div class="ty-showcase-content">
+						<h2>Computer Vision</h2>
+						<p class="ty-text-body">Computer vision analyzes and interprets what's in a picture or video. AI solutions from SAS use computer vision to help you accelerate intelligent automation with simple tools for image processing, image recognition, and object detection.</p>
+					</div>
+				</div>
+				<!-- DEMO -->
+					<div>
+						<iframe src="https://www.gstatic.com/cloud-site-ux/vision.min.html" frameborder="0" scrolling="no" height="150px" style="width: 1px; min-width: 100%; height: 190px;"></iframe>
+					</div>
+				<!-- END DEMO -->
+			</section>
+		</article>
+	</div>
 
-		<form class="box" method="post" action="/upload" enctype="multipart/form-data">
-			<div class="box__input">
-				<input class="box__file" type="file" name="files[]" id="file" data-multiple-caption="{count} files selected" multiple />
-				<label for="file"><strong>Choose a file</strong><span class="box__dragndrop"> or drag it here</span>.</label>
-				<button class="box__button" type="submit">Upload</button>
-			</div>
-			<div class="box__uploading">Uploading&hellip;</div>
-			<div class="box__success">Done!</div>
-			<div class="box__error">Error! <span></span>.</div>
-		</form>
-	</main>
+	<!-- <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+	  <header class="masthead">
+	    <div class="inner">
+	      <h3>CAS API</h1>
+	    </div>
+	  </header>
+
+		<main role="main" class="inner cover">
+			<h1 class="cover-heading">What is this?</h1>
+			<p class="lead">Use SAS AI to do image recognition. Embed SAS AI anywhere with APIs. Drop and image below and see what it is.</p>
+
+			<form class="box" method="post" action="/upload" enctype="multipart/form-data">
+				<div class="box__input">
+					<input class="box__file" type="file" name="files[]" id="file" data-multiple-caption="{count} files selected" multiple />
+					<label for="file"><strong>Choose a file</strong><span class="box__dragndrop"> or drag it here</span>.</label>
+					<button class="box__button" type="submit">Upload</button>
+				</div>
+				<div class="box__uploading">Uploading&hellip;</div>
+				<div class="box__success">Done!</div>
+				<div class="box__error">Error! <span></span>.</div>
+			</form>
+		</main>
+	</div> -->
 {% endblock %}
