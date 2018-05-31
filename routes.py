@@ -4,7 +4,7 @@ from werkzeug.utils import secure_filename
 import swat
 import requests
 
-UPLOAD_FOLDER = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'uploads')
+UPLOAD_FOLDER = '/imgcaslib'
 # ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 
 app = Flask(__name__)
@@ -27,13 +27,13 @@ def upload():
 			return redirect(url_for('index'))
 		if file:
 			filename = secure_filename(file.filename)
-			file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+			filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+			file.save(filepath)
 
 			# CAS Image Processing
 			s = swat.CAS('localhost', 5570, 'tyfrec', 'tyfrec1')
 			s.loadactionset('image')
-			path = request.url_root + url_for('uploaded_file', filename=filename)[1:]
-			s.loadimages(path=path, casout={'name':'img'})
+			s.loadimages(filepath, casout={'name':'img'})
 			s.loadactionset('astore')
 			s.score(table={'name':'img'}, out={'name':'score'}, rstore={'name':'lenet'})
 			score = s.fetch(table={'name':'score'})
