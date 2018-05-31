@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, send_from_
 import os
 from werkzeug.utils import secure_filename
 import swat
+import requests
 
 UPLOAD_FOLDER = './uploads'
 # ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
@@ -27,19 +28,30 @@ def upload():
 		if file:
 			filename = secure_filename(file.filename)
 			file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-			return render_template('demo.html')
-			# return url_for('uploaded_file', filename=filename)
+
+			# CAS Image Processing
+			s = swat.CAS('tyler-cas.gtp-americas.sashq-d.openstack.sas.com', 5570, 'tyfrec', 'tyfrec1')
+			s.loadactionset('image')
+			path = request.url_root + url_for('uploaded_file', filename=filename)[1:]
+			s.loadimages(path=path, casout={'name':'img'})
+			s.loadactionset('astore')
+			s.score(table={'name':'img'}, out={'name':'score'}, rstore={'name':'lenet'})
+			score = s.fetch(table={'name':'score'})
+			s.endSession()
+			return score
 	return redirect(url_for('index'))
 
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):
 	return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
+@app.route('/demo')
+def demo():
+	return render_template('demo.html')
+
 def allowed_file(filename):
 	return '.' in filename and \
 		filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 if __name__ == '__main__':
-	s = swat.CAS('tyler-cas.gtp-americas.sashq-d.openstack.sas.com', 5570, 'tyfrec', 'tyfrec1')
-	s.loadactionset('image')
 	app.run(debug=True, host='0.0.0.0')
