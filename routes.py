@@ -4,7 +4,7 @@ from werkzeug.utils import secure_filename
 import swat
 import requests
 
-UPLOAD_FOLDER = './uploads'
+UPLOAD_FOLDER = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'uploads')
 # ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 
 app = Flask(__name__)
@@ -30,7 +30,7 @@ def upload():
 			file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
 			# CAS Image Processing
-			s = swat.CAS('tyler-cas.gtp-americas.sashq-d.openstack.sas.com', 5570, 'tyfrec', 'tyfrec1')
+			s = swat.CAS('localhost', 5570, 'tyfrec', 'tyfrec1')
 			s.loadactionset('image')
 			path = request.url_root + url_for('uploaded_file', filename=filename)[1:]
 			s.loadimages(path=path, casout={'name':'img'})
