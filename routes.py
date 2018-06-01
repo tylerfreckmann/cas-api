@@ -6,6 +6,9 @@ import requests
 from collections import OrderedDict
 
 UPLOAD_FOLDER = '/imgcaslib'
+AUTHINFO = './.authinfo'
+ASTORE_LIB = 'casuser'
+ASTORE = 'lenet'
 # ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 
 app = Flask(__name__)
@@ -32,11 +35,11 @@ def upload():
 			file.save(filepath)
 
 			# CAS Image Processing
-			s = swat.CAS('localhost', 5570, 'tyfrec', 'tyfrec1')
+			s = swat.CAS('localhost', 5570, authinfo=AUTHINFO)
 			s.loadactionset('image')
 			s.loadimages(filepath, casout={'name':'img'})
 			s.loadactionset('astore')
-			s.score(table={'name':'img'}, out={'name':'score'}, rstore={'name':'lenet'})
+			s.score(table={'name':'img'}, out={'name':'score'}, rstore={'name':ASTORE, 'caslib':ASTORE_LIB})
 			scores = s.fetch(table={'name':'score'})['Fetch'].loc[0,:].to_dict()
 			label = scores.pop('I__label_')
 			s.endSession()
