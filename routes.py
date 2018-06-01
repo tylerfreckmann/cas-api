@@ -1,8 +1,9 @@
-from flask import Flask, render_template, request, redirect, url_for, send_from_directory
+from flask import Flask, render_template, request, redirect, url_for, send_from_directory, jsonify
 import os
 from werkzeug.utils import secure_filename
 import swat
 import requests
+from collections import OrderedDict
 
 UPLOAD_FOLDER = '/imgcaslib'
 # ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
@@ -36,9 +37,13 @@ def upload():
 			s.loadimages(filepath, casout={'name':'img'})
 			s.loadactionset('astore')
 			s.score(table={'name':'img'}, out={'name':'score'}, rstore={'name':'lenet'})
-			score = s.fetch(table={'name':'score'})
+			scores = s.fetch(table={'name':'score'})['Fetch'].loc[0,:].to_dict()
+			label = scores.pop('I__label_')
 			s.endSession()
-			return score
+			return jsonify({'imgUrl': url_for('uploaded_file', filename=filename),
+				'label': label,
+				'scores': scores})
+
 	return redirect(url_for('index'))
 
 @app.route('/uploads/<filename>')
