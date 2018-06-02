@@ -144,3 +144,19 @@ img {
   height: 100%;
   background-color: #4CAF50;
 }
+
+#exit.ty-app::before {
+  content: '\0000D7';
+}
+
+#exit.ty-app {
+  cursor: pointer;
+  font-size: 2.3em;
+  font-weight: bold;
+  line-height: 0.6em;
+  opacity: .8;
+/*  position: absolute;
+  right: 8px;
+  top: 8px;
+*/  z-index: 1;
+}
