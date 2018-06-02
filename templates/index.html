@@ -1,39 +1,39 @@
 {% extends "layout.html" %}
 
 {% block content %}
-	<div class="d-flex w-100 h-100 p-3 mx-auto flex-column ty-wrapper">
-		<article>
-			<header>
-				<div class="ty-header-div">
-					<h1 class="ty-title">CAS API</h1>
-					<h2 class="ty-subtitle">Use the power of CAS in your applications</h2>
-				</div>
-			</header>
-			<section class="ty-content">
-				<div class="ty-showcase">
-					<div class="ty-showcase-content">
-						<h2>Computer Vision</h2>
-						<p class="ty-text-body">Computer vision analyzes and interprets what's in a picture or video. AI solutions from SAS use computer vision to help you accelerate intelligent automation with simple tools for image processing, image recognition, and object detection.</p>
-					</div>
-				</div>
-				<!-- DEMO -->
-					<div class="demo-container" id="image-demo">
-						<div class="ty-center ty-app">
-							<div class="try-it ty-app">Try it!</div>
-							<form action="/upload" class="dropzone ty-center ty-app" id="my-awesome-dropzone"></form>
-						</div>
-					</div>
-					<div id="image-results" class="demo-container ty-center-h ty-app">
-						<div id="image-preview" class="ty-app">
-							<img src="">
-						</div>
-						<div id="scores" class="ty-app">
-							<div id="score-card" class="ty-card"></div>
-						</div>
-						<div id="exit" class="ty-app"></div>
-					</div>
-				<!-- END DEMO -->
-			</section>
-		</article>
-	</div>
+  <div class="d-flex w-100 h-100 p-3 mx-auto flex-column ty-wrapper">
+    <article>
+      <header>
+        <div class="ty-header-div">
+          <h1 class="ty-title">CAS API</h1>
+          <h2 class="ty-subtitle">Use the power of CAS in your applications</h2>
+        </div>
+      </header>
+      <section class="ty-content">
+        <div class="ty-showcase">
+          <div class="ty-showcase-content">
+            <h2>Computer Vision</h2>
+            <p class="ty-text-body">Computer vision analyzes and interprets what's in a picture or video. AI solutions from SAS use computer vision to help you accelerate intelligent automation with simple tools for image processing, image recognition, and object detection.</p>
+          </div>
+        </div>
+        <!-- DEMO -->
+          <div class="demo-container" id="image-demo">
+            <div class="ty-center ty-app">
+              <div class="try-it ty-app">Try it!</div>
+              <form action="/upload" class="dropzone ty-center ty-app" id="my-awesome-dropzone"></form>
+            </div>
+          </div>
+          <div id="image-results" class="demo-container ty-center-h ty-app">
+            <div id="image-preview" class="ty-app">
+              <img src="">
+            </div>
+            <div id="scores" class="ty-app">
+              <div id="score-card" class="ty-card"></div>
+            </div>
+            <div id="exit" class="ty-app"></div>
+          </div>
+        <!-- END DEMO -->
+      </section>
+    </article>
+  </div>
 {% endblock %}
