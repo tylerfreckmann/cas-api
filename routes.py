@@ -2,19 +2,11 @@ from flask import Flask, render_template, request, redirect, url_for, send_from_
 import os
 from werkzeug.utils import secure_filename
 import swat
-import requests
-from collections import OrderedDict
+import sys
 
-APP_IP = '0.0.0.0'
-APP_PORT = 7050
-AUTHINFO = './.authinfo'
-UPLOAD_FOLDER = '/imgcaslib'
-ASTORE_LIB = 'casuser'
-ASTORE = 'lenet'
 # ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 
 app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route('/')
 def index():
@@ -33,7 +25,7 @@ def upload():
             return redirect(url_for('index'))
         if file:
             filename = secure_filename(file.filename)
-            filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            filepath = os.path.join(UPLOAD_FOLDER, filename)
             file.save(filepath)
 
             # CAS Image Processing
@@ -53,11 +45,25 @@ def upload():
 
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):
-    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
+    return send_from_directory(UPLOAD_FOLDER, filename)
 
 def allowed_file(filename):
     return '.' in filename and \
         filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 if __name__ == '__main__':
+    if len(sys.argv) == 7:
+        APP_IP = sys.argv[1]
+        APP_PORT = int(sys.argv[2])
+        UPLOAD_FOLDER = sys.argv[3]
+        AUTHINFO = sys.argv[4]
+        ASTORE = sys.argv[5]
+        ASTORE_LIB = sys.argv[6]
+    else:
+        APP_IP = '0.0.0.0'
+        APP_PORT = 7050
+        UPLOAD_FOLDER = '/imgcaslib'
+        AUTHINFO = './.authinfo'
+        ASTORE = 'lenet'
+        ASTORE_LIB = 'casuser'
     app.run(debug=True, host=APP_IP, port=APP_PORT)
