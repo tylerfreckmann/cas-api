@@ -5,8 +5,10 @@ import swat
 import requests
 from collections import OrderedDict
 
-UPLOAD_FOLDER = '/imgcaslib'
+APP_IP = '0.0.0.0'
+APP_PORT = 7050
 AUTHINFO = './.authinfo'
+UPLOAD_FOLDER = '/imgcaslib'
 ASTORE_LIB = 'casuser'
 ASTORE = 'lenet'
 # ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
@@ -58,4 +60,4 @@ def allowed_file(filename):
 		filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 if __name__ == '__main__':
-	app.run(debug=True, host='0.0.0.0', port=7050)
+	app.run(debug=True, host=APP_IP, port=APP_PORT)
