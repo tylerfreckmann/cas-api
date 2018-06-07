@@ -16,7 +16,7 @@ package which is a Python interface to CAS. This app was built using
 Python 3.6.5.
 
 You can use any Python package and environment managers to make sure that
-you have Python 3, Flask, and CAS installed. See the [SWAT](https://sassoftware.github.io/python-swat/install.html)
+you have Python 3, Flask, and SWAT installed. See the [SWAT](https://sassoftware.github.io/python-swat/install.html)
 page to see instructions on installing CAS. An example would be to
 use `pip` and `virtualenv` to create an isolated Python 3 environment,
 and install Flask and CAS with `pip`.
