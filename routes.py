@@ -28,14 +28,21 @@ def upload():
             filepath = os.path.join(UPLOAD_FOLDER, filename)
             file.save(filepath)
 
-            # CAS Image Processing
+            # CAS Image Processing - load images
             s = swat.CAS('localhost', 5570, authinfo=AUTHINFO)
             s.loadactionset('image')
             s.loadimages(filepath, casout={'name':'img'})
+            # Load astore - for now astore exists in / and caslib is session scoped
+            # TODO - user upload astore
             s.loadactionset('astore')
-            s.score(table={'name':'img'}, out={'name':'score'}, rstore={'name':ASTORE, 'caslib':ASTORE_LIB})
+            with open('/' + ASTORE + '.astore', 'rb') as f:
+              store_ = swat.blob(f.read())
+              s.astore.upload(rstore=ASTORE, store=store_)
+            # s.score(table={'name':'img'}, out={'name':'score'}, rstore={'name':ASTORE, 'caslib':ASTORE_LIB})
+            s.score(table={'name':'img'}, out={'name':'score'}, rstore={'name':ASTORE})
             scores = s.fetch(table={'name':'score'})['Fetch'].loc[0,:].to_dict()
             label = scores.pop('I__label_')
+            s.droptable(ASTORE)
             s.endSession()
             return jsonify({'imgUrl': url_for('uploaded_file', filename=filename),
                 'label': label,
@@ -52,18 +59,20 @@ def allowed_file(filename):
         filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 if __name__ == '__main__':
-    if len(sys.argv) == 7:
+    if len(sys.argv) == 6:
+    # TODO - user upload astore 
+    # To start app only want to use APP_IP, APP_PORT, UPLOAD_FOLDER params
         APP_IP = sys.argv[1]
         APP_PORT = int(sys.argv[2])
         UPLOAD_FOLDER = sys.argv[3]
         AUTHINFO = sys.argv[4]
         ASTORE = sys.argv[5]
-        ASTORE_LIB = sys.argv[6]
+        # ASTORE_LIB = sys.argv[6]
     else:
         APP_IP = '0.0.0.0'
         APP_PORT = 7050
         UPLOAD_FOLDER = '/imgcaslib'
         AUTHINFO = './.authinfo'
         ASTORE = 'lenet'
-        ASTORE_LIB = 'casuser'
+        # ASTORE_LIB = 'casuser'
     app.run(debug=True, host=APP_IP, port=APP_PORT)
